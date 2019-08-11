@@ -2,7 +2,7 @@
   "name": "spbstu_acquiring",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/h4/spbstu_acquiring",
+  "homepage": "https://h4.github.io/spbstu_acquiring/",
   "devDependencies": {
     "react-scripts": "3.1.0",
     "gh-pages": "^2.1.1"
