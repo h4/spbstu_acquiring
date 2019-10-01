@@ -11,8 +11,8 @@ function App() {
       <Layout>
         <Header>
           <Row type="flex" justify="space-between">
-            <Col span={6} style={{color: "white"}}>NoBody Inc</Col>
-            <Col span={3}>
+            <Col md={6} style={{color: "white"}}>NoBody Inc</Col>
+            <Col md={3}>
               <Menu
                 mode="horizontal"
                 defaultSelectedKeys={["en"]}
@@ -25,7 +25,7 @@ function App() {
         </Header>
         <Content style={{padding: 36}}>
           <Row>
-            <Col span={8} offset={8}>
+            <Col md={{ span: 8, offset: 8 }}>
               <Card title="Login">
                 <LoginForm />
               </Card>
@@ -34,7 +34,7 @@ function App() {
         </Content>
         <Footer>
           <Row>
-            <Col span={6}>&copy; 2019 Nobody Inc</Col>
+            <Col md={6}>&copy; 2019 Nobody Inc</Col>
           </Row>
         </Footer>
       </Layout>
