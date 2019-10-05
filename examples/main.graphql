@@ -1,0 +1,141 @@
+scalar Timestamp
+scalar Int64
+
+directive @isAuthenticated on FIELD_DEFINITION
+directive @isAdmin on FIELD_DEFINITION
+
+# Model User
+
+type User {
+    id: ID!
+    name: String!
+    isActive: Boolean!
+    createdAt: Timestamp!
+    updatedAt: Timestamp!
+
+    authn: [Auth]
+    roles: [Role]
+    contacts: [ProfileContact]
+}
+
+# Models Authorization
+
+type Role {
+    id: ID!
+    name: String!
+    synonym: String
+    isAdmin: Boolean
+}
+
+# Models Authentication
+
+enum AuthType {
+    BASIC
+    OAUTH2
+}
+
+type Auth {
+    id: ID!
+    user: User!
+    type: AuthType!
+    provider: String!
+    uid: String!
+    password: String!
+    attempts: Int!
+    isActive: Boolean!
+    createdAt: Timestamp!
+    updatedAt: Timestamp!
+}
+
+# Models Profile
+
+enum ProfileContactType {
+    EMAIL
+    PHONE
+}
+
+type ProfileContact {
+    id: ID!
+    user: User!
+    type: ProfileContactType!
+    value: String!
+    isValid: Boolean!
+    checkValue: String
+    isActive: Boolean!
+    createdAt: Timestamp!
+    updatedAt: Timestamp!
+}
+
+# Models Acquiring Info
+
+type AcquiringInfo {
+    id: ID!
+    createAt: Timestamp!
+    bankAt: Timestamp
+    bankStatus: String
+    billAt: Timestamp
+    bill: String
+    sum: Float
+    description: String
+    profileContact: ProfileContact!
+}
+
+# GraphQL
+
+type Query {
+    currentUser: User
+
+    acquiringData(limit: Int = 25, offset: Int = 0): [AcquiringInfo!]!
+}
+
+type SignTokenInfo {
+    accessToken: String!
+    tokenType: String!
+    expiresAt: Int64!
+}
+
+input signDataBasic {
+    username: String!
+    password: String!
+    idCaptcha: String
+    codeCaptcha: String
+    sessionToken: String!
+}
+
+input signDataOAuth2 {
+    extProvider: String!
+    sessionToken: String!
+}
+
+type ResultSignBasic {
+    tokenInfo: SignTokenInfo
+    isCaptcha: Boolean!
+}
+
+type Mutation {
+    changeActiveStatusUser(id: ID!, status: Boolean!):Boolean @isAuthenticated @isAdmin
+
+    createProfileContact(type: ProfileContactType!, value: String!):ProfileContact! @isAuthenticated
+    newVerifyProfileContact(id: ID!):Boolean @isAuthenticated
+    verifyProfileContact(id: ID!, checkValue: String!):Boolean @isAuthenticated
+
+
+    signOnBasic(name: String!, input: signDataBasic!): SignTokenInfo!
+    signOnOAuth2(input: signDataOAuth2!): SignTokenInfo!
+
+    signInBasic(input: signDataBasic!): ResultSignBasic!
+    signInOAuth2(input: signDataOAuth2!): SignTokenInfo!
+
+    signOut(sessionToken: String):Boolean @isAuthenticated
+
+    updatePasswordBasic(sessionToken: String, old: String!, new: String!):Boolean! @isAuthenticated
+
+    getCaptchaID(sessionToken: String):String!
+    getCaptcha(captchaID: String!, reload: Boolean!):String!
+
+    refreshToken(sessionToken: String): SignTokenInfo! @isAuthenticated
+}
+
+type Subscription {
+    AcquiringInfoPublished: AcquiringInfo! @isAuthenticated
+}
