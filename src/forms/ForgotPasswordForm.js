@@ -1,5 +1,6 @@
 import React from 'react';
-import {Form, Icon, Input, Button, Checkbox, Row} from 'antd';
+import {Link} from 'react-router-dom';
+import {Form, Icon, Input, Button, Row} from 'antd';
 
 class NormalLoginForm extends React.Component {
   handleSubmit = e => {
@@ -14,7 +15,7 @@ class NormalLoginForm extends React.Component {
   render() {
     const {getFieldDecorator} = this.props.form;
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
+      <Form onSubmit={this.handleSubmit} className="forgot-password-form">
         <Form.Item>
           {getFieldDecorator('username', {
             rules: [{required: true, message: 'Please input your username!'}],
@@ -25,36 +26,26 @@ class NormalLoginForm extends React.Component {
             />,
           )}
         </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('password', {
-            rules: [{required: true, message: 'Please input your Password!'}],
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
-              type="password"
-              placeholder="Password"
-            />,
-          )}
-        </Form.Item>
+
         <Form.Item>
           <Row type="flex" justify="space-between">
             <div>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true,
-              })(<Checkbox>Remember me</Checkbox>)}
               <Button
                 type="primary"
                 htmlType="submit"
                 block={true}
                 className="login-form-button">
-                Log in
+                Remember Password
               </Button>
             </div>
 
-            <div style={{lineHeight: 1.6, marginTop: 10}}>
-              <div><a className="login-form-forgot" href="/remember">Forgot password</a></div>
-              <div><a href="/register">Register</a></div>
+            <div style={{lineHeight: 1.6}}>
+              <div>
+                <Link to="/">Login</Link>
+              </div>
+              <div>
+                <Link to="/register">Register</Link>
+              </div>
               <div><a href="http://lk.spbstu.ru/">Login with SPbPU ID</a></div>
             </div>
           </Row>
