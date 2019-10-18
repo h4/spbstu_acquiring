@@ -42,7 +42,7 @@ class NormalLoginForm extends React.Component {
 
         <Form.Item>
           <Row gutter={16} type="flex" justify="space-between" align="middle">
-            <Col span={12}><img src="img/captcha.jpg" alt="captcha"/></Col>
+            <Col span={12}><img src="img/captcha.jpg" style={{maxWidth: "100%"}} alt="captcha"/></Col>
             <Col span={12}>
               {getFieldDecorator('username', {
                 rules: [{required: true, message: 'Please input your username!'}],
