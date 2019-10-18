@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Form, Icon, Input, Button, Checkbox, Row} from 'antd';
+import {Form, Icon, Input, Button, Checkbox, Row, Divider, Col} from 'antd';
 
 class NormalLoginForm extends React.Component {
   handleSubmit = e => {
@@ -22,7 +22,7 @@ class NormalLoginForm extends React.Component {
           })(
             <Input
               prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
-              placeholder="Username"
+              placeholder="Phone Number or Email"
             />,
           )}
         </Form.Item>
@@ -37,9 +37,32 @@ class NormalLoginForm extends React.Component {
             />,
           )}
         </Form.Item>
+
+        <Divider orientation="left">Are you not a bot?</Divider>
+
         <Form.Item>
-          <Row type="flex" justify="space-between">
-            <div>
+          <Row gutter={16} type="flex" justify="space-between" align="middle">
+            <Col span={12}><img src="img/captcha.jpg" alt="captcha"/></Col>
+            <Col span={12}>
+              {getFieldDecorator('username', {
+                rules: [{required: true, message: 'Please input your username!'}],
+              })(
+                <Input
+                  placeholder="Text on Image"
+                />,
+              )}
+              <div>
+                <Link to="">Reload Image</Link>
+                <Divider type="vertical" />
+                <Link to="">Play Sound</Link>
+              </div>
+            </Col>
+          </Row>
+        </Form.Item>
+
+        <Form.Item>
+          <Row gutter={16} type="flex" justify="space-between">
+            <Col span={12}>
               {getFieldDecorator('remember', {
                 valuePropName: 'checked',
                 initialValue: true,
@@ -51,9 +74,9 @@ class NormalLoginForm extends React.Component {
                 className="login-form-button">
                 Log in
               </Button>
-            </div>
+            </Col>
 
-            <div style={{lineHeight: 1.6, marginTop: 10}}>
+            <Col span={12} style={{lineHeight: 1.6, marginTop: 10}}>
               <div>
                 <Link to="/remember">Forgot Password?</Link>
               </div>
@@ -61,7 +84,7 @@ class NormalLoginForm extends React.Component {
                 <Link to="/register">Register</Link>
               </div>
               <div><a href="http://lk.spbstu.ru/">Login with SPbPU ID</a></div>
-            </div>
+            </Col>
           </Row>
         </Form.Item>
       </Form>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Form, Icon, Input, Button, Row} from 'antd';
+import {Form, Icon, Input, Button, Row, Col} from 'antd';
 
 class RegisterForm extends React.Component {
   handleSubmit = e => {
@@ -17,20 +17,12 @@ class RegisterForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <Form.Item>
-          {getFieldDecorator('firstName', {
+          {getFieldDecorator('username', {
             rules: [{required: true, message: 'Please input your username!'}],
           })(
             <Input
-              placeholder="First Name"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('lastName', {
-            rules: [{required: true, message: 'Please input your username!'}],
-          })(
-            <Input
-              placeholder="Last Name"
+              prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
+              placeholder="Phone Number or Email"
             />,
           )}
         </Form.Item>
@@ -46,8 +38,8 @@ class RegisterForm extends React.Component {
           )}
         </Form.Item>
         <Form.Item>
-          <Row type="flex" justify="space-between">
-            <div>
+          <Row gutter={16} type="flex" justify="space-between">
+            <Col span={12}>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -55,14 +47,14 @@ class RegisterForm extends React.Component {
                 className="login-form-button">
                 Register
               </Button>
-            </div>
+            </Col>
 
-            <div style={{lineHeight: 1.6}}>
+            <Col span={12} style={{lineHeight: 1.6}}>
               <div>
                 <Link to="/login">Login</Link>
               </div>
               <div><a href="http://lk.spbstu.ru/">Login with SPbPU ID</a></div>
-            </div>
+            </Col>
           </Row>
         </Form.Item>
       </Form>

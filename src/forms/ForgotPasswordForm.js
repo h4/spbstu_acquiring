@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Form, Icon, Input, Button, Row} from 'antd';
+import {Form, Icon, Input, Button, Row, Col} from 'antd';
 
 class NormalLoginForm extends React.Component {
   handleSubmit = e => {
@@ -22,14 +22,14 @@ class NormalLoginForm extends React.Component {
           })(
             <Input
               prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
-              placeholder="Username"
+              placeholder="Phone Number or Email"
             />,
           )}
         </Form.Item>
 
         <Form.Item>
-          <Row type="flex" justify="space-between">
-            <div>
+          <Row gutter={16} type="flex" justify="space-between">
+            <Col span={12}>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -37,9 +37,9 @@ class NormalLoginForm extends React.Component {
                 className="login-form-button">
                 Remember Password
               </Button>
-            </div>
+            </Col>
 
-            <div style={{lineHeight: 1.6}}>
+            <Col span={12} style={{lineHeight: 1.6}}>
               <div>
                 <Link to="/">Login</Link>
               </div>
@@ -47,7 +47,7 @@ class NormalLoginForm extends React.Component {
                 <Link to="/register">Register</Link>
               </div>
               <div><a href="http://lk.spbstu.ru/">Login with SPbPU ID</a></div>
-            </div>
+            </Col>
           </Row>
         </Form.Item>
       </Form>
