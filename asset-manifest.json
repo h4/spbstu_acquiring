@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/spbstu_acquiring/static/css/main.03eb8281.chunk.css",
-    "main.js": "/spbstu_acquiring/static/js/main.9314acfa.chunk.js",
-    "main.js.map": "/spbstu_acquiring/static/js/main.9314acfa.chunk.js.map",
+    "main.js": "/spbstu_acquiring/static/js/main.8c7c9ccd.chunk.js",
+    "main.js.map": "/spbstu_acquiring/static/js/main.8c7c9ccd.chunk.js.map",
     "runtime~main.js": "/spbstu_acquiring/static/js/runtime~main.63eba33d.js",
     "runtime~main.js.map": "/spbstu_acquiring/static/js/runtime~main.63eba33d.js.map",
     "static/css/2.93e9ecf4.chunk.css": "/spbstu_acquiring/static/css/2.93e9ecf4.chunk.css",
-    "static/js/2.4c70b06c.chunk.js": "/spbstu_acquiring/static/js/2.4c70b06c.chunk.js",
-    "static/js/2.4c70b06c.chunk.js.map": "/spbstu_acquiring/static/js/2.4c70b06c.chunk.js.map",
+    "static/js/2.cf20f77a.chunk.js": "/spbstu_acquiring/static/js/2.cf20f77a.chunk.js",
+    "static/js/2.cf20f77a.chunk.js.map": "/spbstu_acquiring/static/js/2.cf20f77a.chunk.js.map",
     "index.html": "/spbstu_acquiring/index.html",
-    "precache-manifest.782234e9df3b94fe5498d555aea8e752.js": "/spbstu_acquiring/precache-manifest.782234e9df3b94fe5498d555aea8e752.js",
+    "precache-manifest.80dc8ef157ada98db17892c978f0186e.js": "/spbstu_acquiring/precache-manifest.80dc8ef157ada98db17892c978f0186e.js",
     "service-worker.js": "/spbstu_acquiring/service-worker.js",
     "static/css/2.93e9ecf4.chunk.css.map": "/spbstu_acquiring/static/css/2.93e9ecf4.chunk.css.map",
     "static/css/main.03eb8281.chunk.css.map": "/spbstu_acquiring/static/css/main.03eb8281.chunk.css.map"
