@@ -29,7 +29,7 @@ class NormalLoginForm extends React.Component {
 
         <Form.Item>
           <Row gutter={16} type="flex" justify="space-between">
-            <Col span={12}>
+            <Col sm={12} xs={24}>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -39,7 +39,7 @@ class NormalLoginForm extends React.Component {
               </Button>
             </Col>
 
-            <Col span={12} style={{lineHeight: 1.6}}>
+            <Col sm={12} xs={24} style={{lineHeight: 1.6}}>
               <div>
                 <Link to="/">Login</Link>
               </div>

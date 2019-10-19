@@ -42,8 +42,8 @@ class NormalLoginForm extends React.Component {
 
         <Form.Item>
           <Row gutter={16} type="flex" justify="space-between" align="middle">
-            <Col span={12}><img src="img/captcha.jpg" style={{maxWidth: "100%"}} alt="captcha"/></Col>
-            <Col span={12}>
+            <Col sm={12} xs={24}><img src="img/captcha.jpg" style={{maxWidth: "100%"}} alt="captcha"/></Col>
+            <Col sm={12} xs={24}>
               {getFieldDecorator('username', {
                 rules: [{required: true, message: 'Please input your username!'}],
               })(
@@ -62,7 +62,7 @@ class NormalLoginForm extends React.Component {
 
         <Form.Item>
           <Row gutter={16} type="flex" justify="space-between">
-            <Col span={12}>
+            <Col sm={12} xs={24}>
               {getFieldDecorator('remember', {
                 valuePropName: 'checked',
                 initialValue: true,
@@ -76,7 +76,7 @@ class NormalLoginForm extends React.Component {
               </Button>
             </Col>
 
-            <Col span={12} style={{lineHeight: 1.6, marginTop: 10}}>
+            <Col sm={12} xs={24} style={{lineHeight: 1.6, marginTop: 10}}>
               <div>
                 <Link to="/remember">Forgot Password?</Link>
               </div>
