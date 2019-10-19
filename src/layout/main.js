@@ -1,5 +1,7 @@
 import React from "react";
 import {Col, Layout, Menu, Row} from 'antd';
+import UserMenu from './UserMenu';
+import Logo from './Logo';
 
 const {Header, Footer, Content} = Layout;
 
@@ -7,14 +9,18 @@ function MainLayout({children}) {
   return <Layout style={{minHeight: "100vh"}}>
     <Header>
       <Row type="flex" justify="space-between">
-        <Col md={6} style={{color: "white"}}>NoBody Inc</Col>
-        <Col md={5} lg={3}>
+        <Col md={6} style={{color: "white"}}>
+          <Logo>NoBody Inc</Logo>
+        </Col>
+        <Col md={6} lg={5}>
           <Menu
             mode="horizontal"
+            align="right"
             defaultSelectedKeys={["en"]}
-            style={{lineHeight: "64px"}}>
+            style={{lineHeight: "64px", padding: "0 12px"}}>
             <Menu.Item key="en">En</Menu.Item>
             <Menu.Item key="ru">Ru</Menu.Item>
+            <UserMenu />
           </Menu>
         </Col>
       </Row>

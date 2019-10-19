@@ -2,19 +2,23 @@ import React from "react";
 import "./App.css";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-import LoginPage from './pages/Login';
-import ForgotPassword from './pages/ForgotPassword';
-import RegisterPage from './pages/Register';
+import {LoginPage, ForgotPasswordPage, RegisterPage, SettingsPage, LogoutPage} from './pages';
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/remember">
-          <ForgotPassword/>
+          <ForgotPasswordPage/>
         </Route>
         <Route path="/register">
           <RegisterPage/>
+        </Route>
+        <Route path="/settings">
+          <SettingsPage/>
+        </Route>
+        <Route path="/logout">
+          <LogoutPage/>
         </Route>
         <Route path="/">
           <LoginPage/>
