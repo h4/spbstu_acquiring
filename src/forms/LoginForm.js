@@ -1,12 +1,21 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Form, Icon, Input, Button, Checkbox, Row, Divider, Col} from 'antd';
 
+import user from '../state/user';
+
 class NormalLoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {redirect: false};
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        user.login();
+        this.setState({redirect: true});
         console.log('Received values of form: ', values);
       }
     });
@@ -14,6 +23,10 @@ class NormalLoginForm extends React.Component {
 
   render() {
     const {getFieldDecorator} = this.props.form;
+    if (this.state.redirect) {
+      return <Redirect push to="/"/>
+    }
+
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <Form.Item>
@@ -44,8 +57,8 @@ class NormalLoginForm extends React.Component {
           <Row gutter={16} type="flex" justify="space-between" align="middle">
             <Col sm={12} xs={24}><img src="img/captcha.jpg" style={{maxWidth: "100%"}} alt="captcha"/></Col>
             <Col sm={12} xs={24}>
-              {getFieldDecorator('username', {
-                rules: [{required: true, message: 'Please input your username!'}],
+              {getFieldDecorator('capthca', {
+                rules: [{required: true, message: 'Please input text from image!'}],
               })(
                 <Input
                   placeholder="Text on Image"

@@ -1,13 +1,15 @@
 import React from 'react';
-import {Button, Dropdown, Menu} from 'antd';
+import {Button, Divider, Dropdown, Menu} from 'antd';
 import {Link} from 'react-router-dom';
+
+import user from '../state/user';
 
 const menu = (
   <Menu>
     <div style={{padding: "5px 12px"}}>
-      John Doe
+      {user.fullName}
     </div>
-    <Menu.Divider />
+    <Menu.Divider/>
     <Menu.Item key="0">
       <Link to="/settings">
         Settings
@@ -22,8 +24,12 @@ const menu = (
 );
 
 const UserMenu = (props) => {
+  if (!user.isLogged) {
+    return [<Divider key='divider' type='vertical' />, <Link key='link' to="/login">Login</Link>];
+  }
+
   return <Dropdown overlay={menu} placement="bottomRight">
-    <Button size="large" shape="circle" icon="user" />
+    <Button size="large" shape="circle" icon="user"/>
   </Dropdown>
 };
 

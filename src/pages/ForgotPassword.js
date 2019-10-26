@@ -4,7 +4,7 @@ import MainLayout from '../layout/main';
 import ForgotPasswordForm from '../forms/ForgotPasswordForm';
 
 const ForgotPasswordPage = () => (
-  <MainLayout>
+  <MainLayout showMenu={false}>
     <Row>
       <Col md={{span: 16, offset: 4}} lg={{span: 8, offset: 8}}>
         <Card title="Remember Password">
