@@ -22,7 +22,7 @@ const AnonymousItems = [
   <Menu.Item key="1">
     <Link to="/payment"><Icon type="credit-card"/> Payment</Link>
   </Menu.Item>,
-  <Menu.Divider/>,
+  <Menu.Divider key="-"/>,
   <Menu.Item key="2">
     <Link to="/login"><Icon type="user"/> Login</Link>
   </Menu.Item>

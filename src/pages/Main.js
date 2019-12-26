@@ -6,7 +6,7 @@ const { Title } = Typography;
 
 const MainPage = () => (
   <MainLayout>
-    <Title>Acquiring Service</Title>
+    <Title>SPbPU Acquiring Service</Title>
     <p>Some description about service will be here</p>
   </MainLayout>
 );
