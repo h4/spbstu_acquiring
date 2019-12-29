@@ -5,7 +5,8 @@ class User {
     this.isLogged = false;
   }
 
-  login = () => {
+  login = (loginData) => {
+    localStorage.setItem('token', JSON.stringify(loginData.tokenInfo));
     this.isLogged = true;
   };
 

@@ -1,24 +1,18 @@
 import React from 'react';
 import {useMutation} from '@apollo/react-hooks';
 import {Link, Redirect} from 'react-router-dom';
-import {Form, Icon, Input, Button, Checkbox, Row, Divider, Col} from 'antd';
+import {Form, Icon, Input, Button, Checkbox, Row, Divider, Col, Alert} from 'antd';
 import {LOGIN} from '../services/queries/auth'
-import {AUTH_TOKEN} from '../constants'
 
 import user from '../state/user';
 
 const MyForm = ({form, onSubmit}) => {
-  const [signInBasic, {data}] = useMutation(LOGIN);
-  if (data) {
-    console.log(data);
-  }
-
+  const [signInBasic, {error}] = useMutation(LOGIN);
   const handleSubmit = (form, onSubmit) => e => {
     e.preventDefault();
 
     form.validateFields((err, values) => {
       if (!err) {
-        user.login();
         signInBasic({
           variables: {
             type: {
@@ -28,14 +22,18 @@ const MyForm = ({form, onSubmit}) => {
             }
           }
         }).then(onSubmit);
-
-        console.log('Received values of form: ', values);
       }
     });
   };
 
   return (
     <Form onSubmit={handleSubmit(form, onSubmit)} className="login-form">
+      {error && <div className="error">
+        {error.graphQLErrors.map(({message}, i) => (
+          <Alert key={i} message={message} type="error"/>
+        ))}
+      </div>}
+
       <Form.Item>
         {form.getFieldDecorator('username', {
           rules: [{required: true, message: 'Please input your username!'}],
@@ -117,8 +115,9 @@ class NormalLoginForm extends React.Component {
     this.state = {redirect: false};
   }
 
-  _storeToken = token => {
-    localStorage.setItem(AUTH_TOKEN, token)
+  _onSuccess = ({data}) => {
+    user.login(data.signInBasic);
+    this.setState({redirect: true})
   };
 
   render() {
@@ -126,10 +125,8 @@ class NormalLoginForm extends React.Component {
       return <Redirect push to="/"/>
     }
 
-    return <MyForm form={this.props.form} onSubmit={(data) => {
-      console.log(data);
-      this.setState({redirect: true})
-    }}/>;
+    return <MyForm form={this.props.form}
+                   onSubmit={this._onSuccess}/>;
   }
 }
 
