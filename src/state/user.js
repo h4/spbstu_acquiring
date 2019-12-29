@@ -17,6 +17,12 @@ class User {
   get fullName() {
     return `${this.firstName} ${this.lastName}`;
   }
+
+  update(name) {
+    const [firstName, lastName] = name.split(' ');
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 }
 
 const john = new User({firstName: 'John', lastName: 'Doe'});

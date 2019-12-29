@@ -3,8 +3,10 @@ import {Button, Divider, Dropdown, Menu} from 'antd';
 import {Link} from 'react-router-dom';
 
 import user from '../state/user';
+import {useQuery} from '@apollo/react-hooks';
+import {GET_ME} from '../services/queries/user';
 
-const menu = (
+const drawMenu = () => (
   <Menu>
     <div style={{padding: "5px 12px"}}>
       {user.fullName}
@@ -24,13 +26,24 @@ const menu = (
 );
 
 const UserMenu = (props) => {
-  if (!user.isLogged) {
-    return [<Divider key='divider' type='vertical' />, <Link key='link' to="/login">Login</Link>];
-  }
+  const {loading, data} = useQuery(GET_ME);
 
-  return <Dropdown overlay={menu} placement="bottomRight">
-    <Button size="large" shape="circle" icon="user"/>
-  </Dropdown>
+  if (loading) return '...';
+  if (data) {
+    if (data.currentUser) {
+      user.update(data.currentUser.name);
+
+      return <Dropdown
+        overlay={drawMenu()}
+        placement="bottomRight">
+        <Button size="large" shape="circle" icon="user"/>
+      </Dropdown>
+    } else {
+      return [<Divider key='divider' type='vertical'/>, <Link key='link' to="/login">Login</Link>];
+    }
+  } else {
+    return [<Divider key='divider' type='vertical'/>, <Link key='link' to="/login">Login</Link>];
+  }
 };
 
 export default UserMenu;

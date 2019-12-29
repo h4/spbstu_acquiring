@@ -21,7 +21,7 @@ const MyForm = ({form, onSubmit}) => {
               sessionToken: ""
             }
           }
-        }).then(onSubmit);
+        }).then(onSubmit)
       }
     });
   };
