@@ -62,7 +62,7 @@ const RegisterForm = ({form, onSubmit}) => {
       </Form.Item>
 
       <Form.Item>
-        <Captcha />
+        <Captcha form={form} />
       </Form.Item>
 
       <Form.Item>

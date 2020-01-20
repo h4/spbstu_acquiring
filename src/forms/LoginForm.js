@@ -5,6 +5,7 @@ import {Form, Icon, Input, Button, Checkbox, Row, Divider, Col, Alert} from 'ant
 import {LOGIN} from '../services/queries/auth'
 
 import user from '../state/user';
+import Captcha from './Captcha';
 
 const LoginForm = ({form, onSubmit}) => {
   const [signInBasic, {error}] = useMutation(LOGIN);
@@ -59,23 +60,7 @@ const LoginForm = ({form, onSubmit}) => {
       <Divider orientation="left">Are you not a bot?</Divider>
 
       <Form.Item>
-        <Row gutter={16} type="flex" justify="space-between" align="middle">
-          <Col sm={12} xs={24}><img src="img/captcha.jpg" style={{maxWidth: "100%"}} alt="captcha"/></Col>
-          <Col sm={12} xs={24}>
-            {form.getFieldDecorator('capthca', {
-              rules: [{required: true, message: 'Please input text from image!'}],
-            })(
-              <Input
-                placeholder="Text on Image"
-              />,
-            )}
-            <div>
-              <Link to="">Reload Image</Link>
-              <Divider type="vertical"/>
-              <Link to="">Play Sound</Link>
-            </div>
-          </Col>
-        </Row>
+        <Captcha form={form} />
       </Form.Item>
 
       <Form.Item>
