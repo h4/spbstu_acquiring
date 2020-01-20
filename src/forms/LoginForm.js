@@ -6,7 +6,7 @@ import {LOGIN} from '../services/queries/auth'
 
 import user from '../state/user';
 
-const MyForm = ({form, onSubmit}) => {
+const LoginForm = ({form, onSubmit}) => {
   const [signInBasic, {error}] = useMutation(LOGIN);
   const handleSubmit = (form, onSubmit) => e => {
     e.preventDefault();
@@ -125,8 +125,8 @@ class NormalLoginForm extends React.Component {
       return <Redirect push to="/"/>
     }
 
-    return <MyForm form={this.props.form}
-                   onSubmit={this._onSuccess}/>;
+    return <LoginForm form={this.props.form}
+                      onSubmit={this._onSuccess}/>;
   }
 }
 

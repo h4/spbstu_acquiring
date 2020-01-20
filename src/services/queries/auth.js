@@ -5,10 +5,21 @@ const LOGIN = gql`
     signInBasic(input: $type) {
       tokenInfo {
         accessToken,
+        tokenType,
+        expiresAt,
       }
     }
   }
-
 `;
 
-export {LOGIN};
+const REGISTER = gql`
+  mutation SignOnBasic($name: String!, $type: signDataBasic!) {
+    signOnBasic(name: $name, input: $type) {
+      accessToken,
+      tokenType,
+      expiresAt,
+    }
+  }
+`;
+
+export {LOGIN, REGISTER};
