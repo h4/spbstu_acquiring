@@ -21,8 +21,8 @@ const RegisterForm = ({form, onSubmit}) => {
             type: {
               username: values.username,
               password: values.password,
-              idCaptcha: '',
-              codeCaptcha: '',
+              idCaptcha: values.captchaId,
+              codeCaptcha: values.captcha,
               sessionToken: ""
             }
           }

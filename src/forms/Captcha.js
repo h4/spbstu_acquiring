@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom';
 const Captcha = ({form}) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [src, setSrc] = useState('');
+  const [captchaId, setCaptchaId] = useState('');
   const [getCaptchaId, {errorCaptchaId}] = useMutation(GET_CAPTCHA_ID);
   const [getCaptcha, {errorCaptcha}] = useMutation(GET_CAPTCHA);
 
@@ -19,7 +20,10 @@ const Captcha = ({form}) => {
         }
       }).then(({data}) => {
         const captchaID = data.getCaptchaID;
-        console.log(data, captchaID);
+        setCaptchaId(captchaID);
+        form.setFieldsValue({
+          'captchaId': captchaID,
+        });
 
         return getCaptcha({
           variables: {
@@ -32,7 +36,7 @@ const Captcha = ({form}) => {
       }).catch(err => console.log(err));
       setIsLoaded(true);
     }
-  }, [isLoaded, getCaptchaId, getCaptcha, src]);
+  }, [isLoaded, getCaptchaId, getCaptcha, src, captchaId, form]);
 
   return (<div>
     <Row gutter={16} type="flex" justify="space-between" align="middle">
@@ -44,11 +48,18 @@ const Captcha = ({form}) => {
           style={{maxWidth: "100%"}} 
           alt="captcha"/></Col>
       <Col sm={12} xs={24}>
-        {form.getFieldDecorator('capthca', {
+        {form.getFieldDecorator('captcha', {
           rules: [{required: true, message: 'Please input text from image!'}],
         })(
           <Input
             placeholder="Text on Image"
+          />,
+        )}
+        {form.getFieldDecorator('captchaId', {
+          rules: [{required: true, message: 'Please input text from image!'}],
+        })(
+          <Input
+            type='hidden'
           />,
         )}
         <div>
