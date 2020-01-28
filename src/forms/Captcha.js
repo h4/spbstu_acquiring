@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 
 const Captcha = ({form}) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isReloadRequested, requestReload] = useState(false);
   const [src, setSrc] = useState('');
   const [captchaId, setCaptchaId] = useState('');
   const [getCaptchaId, {errorCaptchaId}] = useMutation(GET_CAPTCHA_ID);
@@ -35,9 +36,33 @@ const Captcha = ({form}) => {
       }).then(({data: {getCaptcha}}) => {
         setSrc('data:image/png;base64,' + getCaptcha);
       }).catch(err => console.log(err));
+
       setIsLoaded(true);
     }
   }, [isLoaded, getCaptchaId, getCaptcha, src, captchaId, form]);
+
+  useEffect(() => {
+    if (isReloadRequested) {
+      getCaptcha({
+        variables: {
+          captchaID: captchaId,
+          reload: isReloadRequested
+        }
+      }).then(({data: {getCaptcha}}) => {
+        setSrc('data:image/png;base64,' + getCaptcha);
+      });
+
+      requestReload(false);
+    }
+  }, [getCaptcha, src, captchaId, form, isReloadRequested]);
+
+  const reloadClickHandler = (e) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+
+    requestReload(true);
+    return false;
+  };
 
   return (<div>
     <Row gutter={16} type="flex" justify="space-between" align="middle">
@@ -45,14 +70,15 @@ const Captcha = ({form}) => {
         sm={12}
         xs={24}>
         <img
-          src={src} 
-          style={{maxWidth: "100%"}} 
+          src={src}
+          style={{maxWidth: "100%"}}
           alt="captcha"/></Col>
       <Col sm={12} xs={24}>
         {form.getFieldDecorator('captcha', {
           rules: [{required: true, message: 'Please input text from image!'}],
         })(
           <Input
+            autoComplete="off"
             placeholder="Text on Image"
           />,
         )}
@@ -64,7 +90,8 @@ const Captcha = ({form}) => {
           />,
         )}
         <div>
-          <Link to="">Reload Image</Link>
+          <a href="#"
+             onClick={reloadClickHandler}>Reload Image</a>
           <Divider type="vertical"/>
           <Link to="">Play Sound</Link>
         </div>
