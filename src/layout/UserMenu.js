@@ -30,7 +30,7 @@ const UserMenu = (props) => {
 
   if (loading) return '...';
   if (data) {
-    if (data.currentUser) {
+    if (data.currentUser && user.isLogged) {
       user.update(data.currentUser.name);
 
       return <Dropdown

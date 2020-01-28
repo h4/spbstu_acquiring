@@ -22,7 +22,7 @@ const LoginForm = ({form, onSubmit}) => {
               sessionToken: ""
             }
           }
-        }).then(onSubmit)
+        }).then(onSubmit);
       }
     });
   };

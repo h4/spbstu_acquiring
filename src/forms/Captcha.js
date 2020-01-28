@@ -16,10 +16,11 @@ const Captcha = ({form}) => {
     if (!isLoaded) {
       getCaptchaId({
         variables: {
-          sessionToken: "abc"
+          sessionToken: "abcd"
         }
       }).then(({data}) => {
         const captchaID = data.getCaptchaID;
+
         setCaptchaId(captchaID);
         form.setFieldsValue({
           'captchaId': captchaID,

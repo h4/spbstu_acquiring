@@ -26,9 +26,9 @@ const RegisterForm = ({form, onSubmit}) => {
               sessionToken: ""
             }
           }
-        })
+        }).then(onSubmit);
       }
-    }).then(onSubmit);
+    });
   };
 
   return (
@@ -96,7 +96,7 @@ class NormalRegisterForm extends React.Component {
   }
 
   _onSuccess = ({data}) => {
-    user.login(data.signInBasic);
+    user.login(data.signOnBasic);
     this.setState({redirect: true})
   };
 

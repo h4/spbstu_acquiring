@@ -11,6 +11,7 @@ class User {
   };
 
   logout = () => {
+    localStorage.removeItem('token');
     this.isLogged = false;
   };
 
